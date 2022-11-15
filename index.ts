@@ -1,9 +1,9 @@
 import express from "express";
+import viewsRoute from "./routes/viewsRoute"
 const app = express();
 
-app.get("/", (req, res) => {
-    res.send("Ola")
-})
+app.use("/views", viewsRoute)
+app.get("/", (req, res) => res.send("sumanbiswas-server"))
 
 
 const PORT = process.env.port || 3999;
