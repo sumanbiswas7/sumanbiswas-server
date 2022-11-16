@@ -16,6 +16,7 @@ const router = (0, express_1.Router)();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // increments total views by 1
     // @params: count: number(current views)
+    (0, database_1.goOnline)(firebase_1.database);
     const prevCount = req.query.count;
     const intCount = parseInt(prevCount);
     if (!intCount)
@@ -26,6 +27,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // returns total views or 0 
+    (0, database_1.goOnline)(firebase_1.database);
     const data = yield (0, database_1.get)((0, database_1.ref)(firebase_1.database, "/views"));
     const response = data.val() || { views: 0 };
     (0, database_1.goOffline)(firebase_1.database);
