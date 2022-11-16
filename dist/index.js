@@ -8,6 +8,7 @@ const viewsRoute_1 = __importDefault(require("./routes/viewsRoute"));
 const messageRoute_1 = __importDefault(require("./routes/messageRoute"));
 const ipRoute_1 = __importDefault(require("./routes/ipRoute"));
 const app = (0, express_1.default)();
+// https://sumanbiswas-server.herokuapp.com/
 app.get("/", (req, res) => res.send("sumanbiswas-server"));
 app.use("/views", viewsRoute_1.default);
 app.use("/ip", ipRoute_1.default);
