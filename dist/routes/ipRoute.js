@@ -34,7 +34,7 @@ const moment_1 = __importDefault(require("moment"));
 const axios_1 = __importDefault(require("axios"));
 const router = (0, express_1.Router)();
 dotenv.config();
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
     // gets user data & pushes on db
     const apiKey = process.env.apiKey;
     axios_1.default.get(`https://api.ipdata.co/?api-key=${apiKey}`)

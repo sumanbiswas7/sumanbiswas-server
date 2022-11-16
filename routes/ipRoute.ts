@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { database } from "../database/firebase";
-import { push, ref, goOffline } from "firebase/database";
+import { push, ref } from "firebase/database";
 import * as dotenv from "dotenv";
 import moment from "moment"
 import axios from "axios";
@@ -8,7 +8,7 @@ const router = Router()
 dotenv.config()
 
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
     // gets user data & pushes on db
     const apiKey = process.env.apiKey
     axios.get(`https://api.ipdata.co/?api-key=${apiKey}`)
@@ -22,7 +22,6 @@ router.get("/", (req, res) => {
         .catch(e => res.send(e))
 
 })
-
 
 export default router
 
