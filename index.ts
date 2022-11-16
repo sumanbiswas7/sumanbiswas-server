@@ -1,8 +1,10 @@
 import express from "express";
 import viewsRoute from "./routes/viewsRoute"
+import ipRoute from "./routes/ipRoute"
 const app = express();
 
 app.use("/views", viewsRoute)
+app.use("/ip", ipRoute)
 app.get("/", (req, res) => res.send("sumanbiswas-server"))
 
 
