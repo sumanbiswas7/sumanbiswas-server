@@ -16,12 +16,11 @@ const router = (0, express_1.Router)();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // returns total views or 0 
     const db = (0, database_1.getDatabase)(firebase_1.app);
-    (0, database_1.onValue)((0, database_1.ref)(db, '/views'), (snapshot) => {
-        const data = snapshot.val() || { views: 0 };
-        return res.send(data);
-    }, {
-        onlyOnce: true
-    });
+    const data = yield (0, database_1.get)((0, database_1.ref)(db, "/viewss"));
+    const response = data.val() || { views: 0 };
+    (0, database_1.goOffline)(db);
+    return res.send(response);
 }));
 exports.default = router;

@@ -1,20 +1,19 @@
 import { Router } from "express";
-import { getDatabase, ref, onValue } from "firebase/database";
-import { app } from "../database/firebase";
+import { getDatabase, ref, get, goOffline } from "firebase/database";
+import { app, database } from "../database/firebase";
 const router = Router();
 
 router.post("/", async (req, res) => {
-    
+
 })
 
 router.get("/", async (req, res) => {
+    // returns total views or 0 
     const db = getDatabase(app)
-    onValue(ref(db, '/views'), (snapshot) => {
-        const data = snapshot.val() || { views: 0 }
-        return res.send(data)
-    }, {
-        onlyOnce: true
-    });
+    const data = await get(ref(db, "/viewss"))
+    const response = data.val() || { views: 0 }
+    goOffline(db)
+    return res.send(response)
 
 })
 
