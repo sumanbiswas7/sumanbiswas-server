@@ -18,6 +18,7 @@ router.post("/", (req, res) => {
         .then((r) => {
         const dateTime = (0, moment_1.default)().format('h:mm A, Do MMMM YYYY');
         const dataObj = { date: dateTime, info: r.data };
+        (0, database_1.goOnline)(firebase_1.database);
         (0, database_1.push)((0, database_1.ref)(firebase_1.database, "users"), dataObj)
             .then(() => res.send({ msg: `Success` }))
             .catch(e => res.send({ msg: e.message }));

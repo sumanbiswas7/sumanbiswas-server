@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { database } from "../database/firebase";
-import { push, ref } from "firebase/database";
+import { goOnline, push, ref } from "firebase/database";
 import moment from "moment"
 import axios from "axios";
 const router = Router()
@@ -14,6 +14,7 @@ router.post("/", (req, res) => {
         .then((r) => {
             const dateTime = moment().format('h:mm A, Do MMMM YYYY');
             const dataObj = { date: dateTime, info: r.data }
+            goOnline(database)
             push(ref(database, "users"), dataObj)
                 .then(() => res.send({ msg: `Success` }))
                 .catch(e => res.send({ msg: e.message }))
