@@ -9,4 +9,4 @@ const app = (0, express_1.default)();
 app.use("/views", viewsRoute_1.default);
 app.get("/", (req, res) => res.send("sumanbiswas-server"));
 const PORT = process.env.port || 3999;
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

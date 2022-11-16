@@ -1,12 +1,21 @@
 import { Router } from "express";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { app } from "../database/firebase";
 const router = Router();
 
-router.post("/", (req, res) => {
-    console.log("hiya")
+router.post("/", async (req, res) => {
+    
 })
 
-router.get("/", (req, res) => {
-    res.send(`<h2>views page</h2>`)
+router.get("/", async (req, res) => {
+    const db = getDatabase(app)
+    onValue(ref(db, '/views'), (snapshot) => {
+        const data = snapshot.val() || { views: 0 }
+        return res.send(data)
+    }, {
+        onlyOnce: true
+    });
+
 })
 
 export default router;
