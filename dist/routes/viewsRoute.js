@@ -22,7 +22,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.send(`Missing Query Params: @count`);
     (0, database_1.set)((0, database_1.ref)(firebase_1.database, "/views"), { views: intCount + 1 });
     (0, database_1.goOffline)(firebase_1.database);
-    return res.send(`views increment: successful`);
+    return res.send({ msg: `Success` });
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // returns total views or 0 

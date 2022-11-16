@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
     set(ref(database, "/views"), { views: intCount + 1 })
 
     goOffline(database)
-    return res.send(`views increment: successful`)
+    return res.send({ msg: `Success` })
 })
 
 router.get("/", async (req, res) => {
