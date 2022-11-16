@@ -1,25 +1,24 @@
 import { Router } from "express";
 import { database } from "../database/firebase";
 import { push, ref } from "firebase/database";
-import * as dotenv from "dotenv";
 import moment from "moment"
 import axios from "axios";
 const router = Router()
-dotenv.config()
 
 
 router.post("/", (req, res) => {
     // gets user data & pushes on db
-    const apiKey = process.env.apiKey
+    const apiKey = req.headers.apikey
+    if (!apiKey) return res.send(`apiKey missing`)
     axios.get(`https://api.ipdata.co/?api-key=${apiKey}`)
         .then((r) => {
             const dateTime = moment().format('h:mm A, Do MMMM YYYY');
             const dataObj = { date: dateTime, info: r.data }
             push(ref(database, "users"), dataObj)
-                .then(() => res.send(r.data))
-                .catch(e => res.send(e))
+                .then(() => res.send({ msg: `Success` }))
+                .catch(e => res.send({ msg: e.message }))
         })
-        .catch(e => res.send(e))
+        .catch(e => res.send({ msg: e.message }))
 
 })
 
