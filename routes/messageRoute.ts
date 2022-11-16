@@ -26,7 +26,7 @@ router.post("/", (req, res) => {
     if (!validateEmail(data.email)) return res.send({ msg: `err: provide a valid email` })
     data.date = moment(new Date()).format('h:mm A, Do MMMM YYYY')
 
-    push(ref(database, "messages/"), data)
+    push(ref(database, "/messages"), data)
         .then(() => res.send({ msg: `message sent successfully` }))
         .catch((e) => res.send({ msg: `error: ${e.message}` }));
 

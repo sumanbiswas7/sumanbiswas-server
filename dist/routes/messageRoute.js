@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
     if (!(0, validateEmail_1.validateEmail)(data.email))
         return res.send({ msg: `err: provide a valid email` });
     data.date = (0, moment_1.default)(new Date()).format('h:mm A, Do MMMM YYYY');
-    (0, database_1.push)((0, database_1.ref)(firebase_1.database, "messages/"), data)
+    (0, database_1.push)((0, database_1.ref)(firebase_1.database, "/messages"), data)
         .then(() => res.send({ msg: `message sent successfully` }))
         .catch((e) => res.send({ msg: `error: ${e.message}` }));
 });
