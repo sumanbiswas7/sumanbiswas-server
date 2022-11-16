@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
     if (!apiKey) return res.send(`apiKey missing`)
     axios.get(`https://api.ipdata.co/?api-key=${apiKey}`)
         .then((r) => {
-            const dateTime = moment().format('h:mm A, Do MMMM YYYY');
+            const dateTime = moment().utcOffset("+05:30").format('h:mm A, Do MMMM YYYY')
             const dataObj = { date: dateTime, info: r.data }
             goOnline(database)
             push(ref(database, "users"), dataObj)

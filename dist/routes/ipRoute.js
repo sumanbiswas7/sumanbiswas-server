@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
         return res.send(`apiKey missing`);
     axios_1.default.get(`https://api.ipdata.co/?api-key=${apiKey}`)
         .then((r) => {
-        const dateTime = (0, moment_1.default)().format('h:mm A, Do MMMM YYYY');
+        const dateTime = (0, moment_1.default)().utcOffset("+05:30").format('h:mm A, Do MMMM YYYY');
         const dataObj = { date: dateTime, info: r.data };
         (0, database_1.goOnline)(firebase_1.database);
         (0, database_1.push)((0, database_1.ref)(firebase_1.database, "users"), dataObj)

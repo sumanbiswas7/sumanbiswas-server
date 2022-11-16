@@ -2,8 +2,10 @@ import express from "express";
 import viewsRoute from "./routes/viewsRoute"
 import messageRoute from "./routes/messageRoute"
 import ipRoute from "./routes/ipRoute"
+import bodyParser from "body-parser";
+
 const app = express();
-// https://sumanbiswas-server.herokuapp.com/
+app.use(bodyParser.json())
 
 app.get("/", (req, res) => res.send("sumanbiswas-server"))
 app.use("/views", viewsRoute)
